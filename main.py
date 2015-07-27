@@ -8,9 +8,9 @@ class Users(ndb.Model):
     username = ndb.StringProperty(required=True)
     password = ndb.StringProperty(required=True)
 """
-# '/login' page
+# '/login' page  #copied from learn.co
 class LoginHandler(webapp2.RequestHandler):
-    def get(self): #copied from learn.co
+    def get(self):
         user = users.get_current_user()
         if user:
             greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
@@ -24,11 +24,13 @@ class LoginHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-"""
-# '/profile'
-class ProfileHandler(webapp2.RequestHandler):
+# '/fawk'
+class FawkHandler(webapp2.RequestHandler):
     def get(self):
-
+        template = env.get_template('fawk.html')
+        variables = {}
+        self.response.write(template.render(variables))
+"""
 #tbd
 class RatingHandler(webapp2.RequestHandler):
     def get(self):
@@ -44,5 +46,5 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
-    #('/fawk', FawkHandler)
+    ('/fawk', FawkHandler)
 ], debug=True)
