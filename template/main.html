@@ -1,8 +1,24 @@
 <html>
   <head>
-    <link href = "../static/style.css" rel = "stylesheet">
+    <link href = "../static/style.css" rel = "stylesheet"> <!-- This links the css page to this html page -->
   </head>
   <body>
     <h1> TAWK </h1>
+    <nav class="menu"> <!--the class is menu -->
+    <ul class="active"> <!--the menu is currently active, or visible -->
+        <li class="current-item"><a href="#">Home</a></li>
+        <li><a href="#">My Work</a></li>
+        <li><a href="#">About Me</a></li>
+        <li><a href="#">Get in Touch</a></li>
+        <li><a href="#">Blog</a></li>
+    </ul>
+
+    <a class="toggle-nav" href="#">&#9776;</a>
+
+    <form class="search-form">
+        <input type="text">
+        <button>Search</button>
+    </form>
+</nav>
   </body>
 </html>
