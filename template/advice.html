@@ -3,20 +3,14 @@
     <link href = "../static/style.css" rel = "stylesheet">
   </head>
   <body>
-    <nav class="menu"> <!--the class is menu -->
-    <ul class="active"> <!--the menu is currently active, or visible -->
-        <li><a href="/">Home</a></li>
-        <li><a href="/">My Profile</a></li>
-        <li class="current-item"><a href="/">TAWK</a></li>
-        <li><a href="/fawk">FAWK</a></li>
-        <li><a href="/">About Us</a></li>
-        <li><a href="/login">Login</a></li>
-    </ul>
-
-    <a class="toggle-nav" href="#">&#9776;</a>
-
-    </nav>
+  <!-- the navigation bar goes here -->
     Advice
+
+    <h1>It's not awkward unless you make it awkward!</h1>
+    <!--  To put all the clickable categories-->
+    {% for category in category}
+    <h2>#{{category}}</h2>
+    {% endfor %}
 
   </body>
 </html>

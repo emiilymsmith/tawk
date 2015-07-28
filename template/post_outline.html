@@ -2,11 +2,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--  linking the style.css to post_outline.html-->
     <link href = "../static/style.css" rel = "stylesheet">
   </head>
   <body>
-    <h1> Post outline here</h1>
-    <h3></h3>
+    <!-- Here we have a page for each post and its content -->
+    <h1> {{post.title}}</h1>
+    <h3> {{post.content}} #{{post.category}}</h3>
 
   </body>
 </html>
