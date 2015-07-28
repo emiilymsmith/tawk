@@ -63,8 +63,12 @@ class FawkHandler(webapp2.RequestHandler):
         fawk_post.put()
         return self.redirect("/fawk")
 
-
-
+#opens /about us
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('aboutus.html')
+        variables = {}
+        self.response.write(template.render(variables))
 
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
@@ -78,5 +82,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/fawk', FawkHandler),
-    ('/user', UserHandler)
+    ('/user', UserHandler),
+    ('/about', AboutHandler)
 ], debug=True)
