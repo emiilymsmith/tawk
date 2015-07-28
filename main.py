@@ -16,6 +16,11 @@ class RatingHandler(webapp2.RequestHandler):
 class Users(ndb.Model):
     username = ndb.StringProperty(required=True)
 """
+class TawkHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('tawk.html')
+        variables = {}
+        self.response.write(template.render(variables))
 
 #connects to /user
 class UserHandler(webapp2.RequestHandler):
@@ -83,5 +88,6 @@ app = webapp2.WSGIApplication([
     ('/login', LoginHandler),
     ('/fawk', FawkHandler),
     ('/user', UserHandler),
-    ('/about', AboutHandler)
+    ('/about', AboutHandler),
+    ('/tawk', TawkHandler)
 ], debug=True)
