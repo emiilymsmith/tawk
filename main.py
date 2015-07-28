@@ -36,7 +36,7 @@ class FawkHandler(webapp2.RequestHandler):
     def get(self):
         posts = Post.query().fetch() #list of post objects from ndb model
         template = env.get_template('fawk.html')
-        variables = {}
+        variables = {'posts': posts}
         self.response.write(template.render(variables))
 
     def post(self):
