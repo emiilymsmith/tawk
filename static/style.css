@@ -52,7 +52,7 @@ h2 {
       display:none;
   }
 
-  /*----- Responsive -----*/
+  /*----- Responsive Menu -----*/
   @media screen and (min-width: 0px) {
       .wrap {
           width:90%;
@@ -70,7 +70,7 @@ h2 {
       }
 
       .menu ul {
-          width:110%;
+          width:130%;
           position:absolute;
           top:120%;
           right:10px;
