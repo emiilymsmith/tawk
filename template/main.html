@@ -6,28 +6,31 @@
   </head>
   <body>
     <div class="container">
-        <nav class="menu"> <!--the class is menu -->
-        <ul class="active"> <!--the menu is currently active, or visible -->
-            <li class="current-item"><a href="/">Home</a></li> <!--all the options under the drop menu -->
-            <li><a href="/user">My Profile</a></li>
-            <li><a href="/tawk">Go TAWK</a></li>
-            <li><a href="/fawk">FAWK</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/login">Login</a></li>
+      <nav class="menu">
+        <ul class="active">
+            <li class="current-item"><a href="#">Home</a></li>
+            <li><a href="#">Advice</a>
+              <ul class="sub-menu">
+                <li><a href="#">Get Advice</a>
+                <li><a href="#">Give Advice</a>
+              </ul>
+            </li>
+            <li><a href="#">About Us</a></li>
         </ul>
 
         <a class="toggle-nav" href="#">&#9776;</a>
-        </nav>
+      </nav>
         <h2 id="FAWK"> FAWK &#8594</h2> <!--the two options on the main page-->
         <h2 id="TAWK"> Go TAWK &#8594</h2>
       <div class="header">
         <h1> TAWK </h1>
       </div>
     </div>
+
     <h4><a href = "/advice">Get Advice</h4>
     <h4><a href = "/giveadvice">Give Advice</h4>
+
     <!-- Link to local JavaScript file-->
     <script src="../static/main.js"></script>
   </body>
 </html>
-<!-- get advice, give advice home page -->
