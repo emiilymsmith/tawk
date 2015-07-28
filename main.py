@@ -1,5 +1,6 @@
 import webapp2
 import jinja2
+from google.appengine.ext import ndb
 from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
@@ -24,12 +25,29 @@ class LoginHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
+
+
+#for posts on fawk
+class Post(ndb.Model):
+    content = ndb.StringProperty(required=True)
+
 # '/fawk'
 class FawkHandler(webapp2.RequestHandler):
     def get(self):
+        posts = Post.query().fetch() #list of post objects from ndb model
         template = env.get_template('fawk.html')
         variables = {}
         self.response.write(template.render(variables))
+
+    def post(self):
+        content = self.request.get('content')
+        fawk_post = Post(content=content)
+        fawk_post.put()
+        return self.redirect("/fawk")
+
+
+
+
 """
 #tbd
 class RatingHandler(webapp2.RequestHandler):
