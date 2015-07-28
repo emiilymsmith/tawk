@@ -5,6 +5,22 @@ body {
   font-family: "Fjalla One", sans-serif;
 }
 
+/* These are the two buttons on the home page~ */
+h2 {
+  color:#fff;
+}
+  #FAWK {
+    position:absolute;
+    right:15px;
+    bottom:0px;
+  }
+
+  #TAWK {
+    position:absolute;
+    left:15px;
+    bottom:0px;
+  }
+
 /* HEADER SECTION */
 .header {
   position:absolute;
