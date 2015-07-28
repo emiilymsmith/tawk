@@ -23,7 +23,7 @@
       <section class="new_fawk">
         <form method="POST" action="">
             <p><textarea name="content" rows = "8" placeholder="Your FAWK moment here:" ></textarea></p>
-            <p></p>
+            <p><input name="username" type="string" placeholder="username"/></p>
             <input type="submit" />
         </form>
 
@@ -34,7 +34,7 @@
 
       <section class="fawk_posts">
         {% for post in posts %}
-        <p>{{post.content}}</p>
+          <p> "{{post.content}} FAWK <em>-{{post.username}}</em> "</p>
         {% endfor %}
 
       </section>

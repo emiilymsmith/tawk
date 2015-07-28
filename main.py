@@ -5,19 +5,19 @@ from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
 
-"""
-class Users(ndb.Model):
-    username = ndb.StringProperty(required=True)
-    password = ndb.StringProperty(required=True)
-"""
-
 
 """
 #tbd
 class RatingHandler(webapp2.RequestHandler):
     def get(self):
 """
-#connects to user page
+
+"""
+class Users(ndb.Model):
+    username = ndb.StringProperty(required=True)
+"""
+
+#connects to /user
 class UserHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('user.html')
@@ -45,18 +45,21 @@ class LoginHandler(webapp2.RequestHandler):
 #for posts on fawk
 class Post(ndb.Model):
     content = ndb.StringProperty(required=True)
+    username = ndb.StringProperty(required=True)
 
 # '/fawk'
 class FawkHandler(webapp2.RequestHandler):
     def get(self):
         posts = Post.query().fetch() #list of post objects from ndb model
+        posts.sort()#by what though
         template = env.get_template('fawk.html')
         variables = {'posts': posts}
         self.response.write(template.render(variables))
 
     def post(self):
         content = self.request.get('content')
-        fawk_post = Post(content=content)
+        username = self.request.get('username')
+        fawk_post = Post(content=content,username=username)
         fawk_post.put()
         return self.redirect("/fawk")
 
