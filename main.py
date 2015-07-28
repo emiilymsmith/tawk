@@ -4,11 +4,26 @@ from google.appengine.ext import ndb
 from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
+
 """
 class Users(ndb.Model):
     username = ndb.StringProperty(required=True)
     password = ndb.StringProperty(required=True)
 """
+
+
+"""
+#tbd
+class RatingHandler(webapp2.RequestHandler):
+    def get(self):
+"""
+#connects to user page
+class UserHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('user.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
 # '/login' page  #copied from learn.co
 class LoginHandler(webapp2.RequestHandler):
     def get(self):
@@ -48,11 +63,6 @@ class FawkHandler(webapp2.RequestHandler):
 
 
 
-"""
-#tbd
-class RatingHandler(webapp2.RequestHandler):
-    def get(self):
-"""
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -64,5 +74,6 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
-    ('/fawk', FawkHandler)
+    ('/fawk', FawkHandler),
+    ('/user', UserHandler)
 ], debug=True)
