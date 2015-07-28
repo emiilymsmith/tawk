@@ -5,6 +5,29 @@ from google.appengine.api import users
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
 
+"""
+#for posts on fawk
+class Post(ndb.Model):
+    content = ndb.StringProperty(required=True)
+    username = ndb.StringProperty(required=True)
+
+
+# '/fawk'
+class FawkHandler(webapp2.RequestHandler):
+    def get(self):
+        posts = Post.query().fetch() #list of post objects from ndb model
+        posts.sort()#by what though
+        template = env.get_template('fawk.html')
+        variables = {'posts': posts}
+        self.response.write(template.render(variables))
+
+    def post(self):
+        content = self.request.get('content')
+        username = self.request.get('username')
+        fawk_post = Post(content=content,username=username)
+        fawk_post.put()
+        return self.redirect("/fawk")
+"""
 
 """
 #tbd
@@ -16,6 +39,26 @@ class RatingHandler(webapp2.RequestHandler):
 class Users(ndb.Model):
     username = ndb.StringProperty(required=True)
 """
+
+
+class GiveAdviceHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('give_advice.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+class PostOutlineHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('post_outline.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+class TagsHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('tag.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
 class AdviceHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('advice.html')
@@ -26,6 +69,14 @@ class AdviceHandler(webapp2.RequestHandler):
 class UserHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('user.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+
+#opens /about us
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('about.html')
         variables = {}
         self.response.write(template.render(variables))
 
@@ -45,36 +96,6 @@ class LoginHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-
-
-#for posts on fawk
-class Post(ndb.Model):
-    content = ndb.StringProperty(required=True)
-    username = ndb.StringProperty(required=True)
-
-# '/fawk'
-class FawkHandler(webapp2.RequestHandler):
-    def get(self):
-        posts = Post.query().fetch() #list of post objects from ndb model
-        posts.sort()#by what though
-        template = env.get_template('fawk.html')
-        variables = {'posts': posts}
-        self.response.write(template.render(variables))
-
-    def post(self):
-        content = self.request.get('content')
-        username = self.request.get('username')
-        fawk_post = Post(content=content,username=username)
-        fawk_post.put()
-        return self.redirect("/fawk")
-
-#opens /about us
-class AboutHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('aboutus.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -86,8 +107,12 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
-    ('/fawk', FawkHandler),
-    ('/user', UserHandler),
     ('/about', AboutHandler),
-    ('/advice', AdviceHandler)
+    ('/user', UserHandler),
+    ('/advice', AdviceHandler),
+    ('/tag', TagsHandler),
+    ('/postoutile', PostOutlineHandler),
+    ('/giveadvice', GiveAdviceHandler),
+
+    #('/fawk', FawkHandler),
 ], debug=True)
