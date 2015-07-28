@@ -24,7 +24,6 @@ h2 {
 /* HEADER SECTION */
 .header {
   position:absolute;
-  top:10%;
   text-align:center;
   width:100%;
   color: #fff;
@@ -54,13 +53,13 @@ h2 {
   }
 
   /*----- Responsive -----*/
-  @media screen and (min-width: 860px) {
+  @media screen and (min-width: 0px) {
       .wrap {
           width:90%;
       }
   }
 
-  @media screen and (min-width: 860px) {
+  @media screen and (min-width: 0px) {
       .menu {
           position:relative;
           display:inline-block;
@@ -130,7 +129,7 @@ h2 {
           text-decoration: none;
       }
 
-      .toggle-nav:hover, .toggle-nav.active {
+      .toggle-nav:hover, /*.toggle-nav.active*/ {
           text-decoration:none;
           color:#eee;
       }
