@@ -5,28 +5,24 @@
   </head>
   <body>
     <div class="container">
+      <nav class="menu"> <!--the class is menu -->
+      <ul class="active"> <!--the menu is currently active, or visible -->
+          <li class="current-item"><a href="#">Home</a></li> <!--all the options under the drop menu -->
+          <li><a href="#">My Work</a></li>
+          <li><a href="#">About Me</a></li>
+          <li><a href="#">Get in Touch</a></li>
+          <li><a href="/login">Login</a></li>
+      </ul>
+
+      <a class="toggle-nav" href="#">&#9776;</a>
+      </nav>
       <div class="header">
         <h1> TAWK </h1>
       </div>
     </div>
-    <nav class="menu"> <!--the class is menu -->
-    <ul class="active"> <!--the menu is currently active, or visible -->
-        <li class="current-item"><a href="#">Home</a></li> <!--all the options under the drop menu -->
-        <li><a href="#">My Work</a></li>
-        <li><a href="#">About Me</a></li>
-        <li><a href="#">Get in Touch</a></li>
-        <li><a href="/login">Login</a></li>
-    </ul>
 
-    <a class="toggle-nav" href="#">&#9776;</a>
-
-    <form class="search-form">
-        <input type="text">
-        <button>Search</button>
       <h2> FAWK </h2> <!--the two options on the main page-->
       <h2> Go TAWK </h2>
-    </form>
-    </nav>
     <h3> Select Your Situation</h3>
     <h4> Family <br>
         Friends <br>
@@ -35,7 +31,7 @@
     <h5> More + </h5>
     <!-- jQuery things-->
     <script>
-        jQuery(document).ready(function() {
+    jQuery(document).ready(function() {
         jQuery('.toggle-nav').click(function(e) {
             jQuery(this).toggleClass('active');
             jQuery('.menu ul').toggleClass('active');
