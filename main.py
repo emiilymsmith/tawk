@@ -39,46 +39,13 @@ class RatingHandler(webapp2.RequestHandler):
 class Users(ndb.Model):
     username = ndb.StringProperty(required=True)
 """
-
-
-class GiveAdviceHandler(webapp2.RequestHandler):
+# '/' goes to main.html in template
+class MainHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('give_advice.html')
+        template = env.get_template('main.html')
         variables = {}
         self.response.write(template.render(variables))
-
-class PostOutlineHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('post_outline.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
-class TagsHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('tag.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
-class AdviceHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('advice.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
-#connects to /user
-class UserHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('user.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
-
-#opens /about us
-class AboutHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('about.html')
-        variables = {}
-        self.response.write(template.render(variables))
+        #self.response.write('Hello world!')
 
 # '/login' page  #copied from learn.co
 class LoginHandler(webapp2.RequestHandler):
@@ -96,23 +63,80 @@ class LoginHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-# '/' goes to main.html in template
-class MainHandler(webapp2.RequestHandler):
+
+#opens /about us
+class AboutHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('main.html')
+        template = env.get_template('about.html')
         variables = {}
         self.response.write(template.render(variables))
-        #self.response.write('Hello world!')
+
+
+#connects to /user
+class UserHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('user.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+
+
+#new database for a "give advice" post
+class GiveAdvicePost(ndb.Model):
+    title = ndb.StringProperty(required=True)
+    content = ndb.TextProperty(required=True)
+    category = ndb.StringProperty(required=True)
+
+#handler for "giving advice"
+class SubmitAdviceHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('give_advice.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+    def post(self):
+        title = self.request.get('title')
+        content = self.request.get('content')
+        category = self.request.get('category')
+
+        #category = self. I need a way for what they choose to be put here.
+        post = GiveAdvicePost(title=title,content=content,category=category)
+        post.put()
+        self.response.write("Your request has been submitted")
+
+####how do I give them a notice that their advice has been submitted,
+####and to go o a page that says sumbit more.
+
+
+# for the home page of advice posts
+class AdviceHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('advice.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+class PostOutlineHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('post_outline.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+class CategoryHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('tag.html')
+        variables = {}
+        self.response.write(template.render(variables))
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
     ('/about', AboutHandler),
     ('/user', UserHandler),
+    ('/giveadvice', SubmitAdviceHandler),
     ('/advice', AdviceHandler),
-    ('/tag', TagsHandler),
-    ('/postoutile', PostOutlineHandler),
-    ('/giveadvice', GiveAdviceHandler),
-
-    #('/fawk', FawkHandler),
+    ('/tag', CategoryHandler),
+    ('/postoutile', PostOutlineHandler)
+    #('/fawk', FawkHandler)
 ], debug=True)

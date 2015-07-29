@@ -9,9 +9,10 @@
     <h1> Give Advice</h1>
     <h3>TAWK about it</h3>
     <!--  the form to submit a piece of advice to the database - has title, content, and category-->
-    <form>
-      <input name = "title" type = "text"/>
-      <textarea name = "content" rows = "10"></textarea>
-      <input name = "category" type = "text"/>
+    <form action="/giveadvice" method="POST">
+      <p><input name = "title" type = "text" placeholder = "Title of Post"/></p>
+      <p><textarea name = "content" rows = "15" placeholder = "Give me S.U.M. advice, TAWK about it!"></textarea></p>
+      <p><input name = "category" type = "text" placeholder = "Category"/></p>
+      <p><input type="submit"/></p>
   </body>
 </html>
