@@ -85,10 +85,10 @@ class UserHandler(webapp2.RequestHandler):
 class GiveAdvicePost(ndb.Model):
     title = ndb.StringProperty(required=True)
     content = ndb.TextProperty(required=True)
-    category = ndb.StringProperty(required=True)
+
 
 #handler for "giving advice"
-class SubmitAdviceHandler(webapp2.RequestHandler):
+class GiveAdviceHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('give_advice.html')
         variables = {}
@@ -97,14 +97,11 @@ class SubmitAdviceHandler(webapp2.RequestHandler):
     def post(self):
         title = self.request.get('title')
         content = self.request.get('content')
-        category = self.request.get('category')
 
-        #category = self. I need a way for what they choose, to be put here.
-        post = GiveAdvicePost(title=title,content=content,category=category)
+        post = GiveAdvicePost(title=title,content=content)
         post.put()
-        self.response.write("Your advice has been submitted")
-        #return self.redirect('/redirect')
-##### help now I want it to go to advice.html
+        #self.redirect( '/advice?key=' + advice.key.urlsafe() )
+        return self.redirect('/advice')
 
 
 
@@ -116,20 +113,35 @@ class AdviceHandler(webapp2.RequestHandler):
         self.response.write(template.render(variables))
 
     def post(self):
-        pass
+        advice = GiveAdvicePost.query().fetch()
 
 
 class PostOutlineHandler(webapp2.RequestHandler):
     def get(self):
+
+
         template = env.get_template('post_outline.html')
         variables = {}
         self.response.write(template.render(variables))
+
+
+class Categories(ndb.Model):
+    family = ndb.StringProperty(required=True)
+    friends = ndb.StringProperty(required=True)
+    strangers = ndb.StringProperty(required=True)
+    date = ndb.StringProperty(required=True)
+    strangers = ndb.StringProperty(required=True)
+    general = ndb.StringProperty(required=True)
+
+
 
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('tag.html')
         variables = {}
         self.response.write(template.render(variables))
+    def post(self):
+        pass
 
 
 
@@ -138,7 +150,7 @@ app = webapp2.WSGIApplication([
     ('/login', LoginHandler),
     ('/about', AboutHandler),
     ('/user', UserHandler),
-    ('/giveadvice', SubmitAdviceHandler),
+    ('/giveadvice', GiveAdviceHandler),
     ('/advice', AdviceHandler),
     ('/tag', CategoryHandler),
     ('/postoutile', PostOutlineHandler),
