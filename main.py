@@ -102,8 +102,8 @@ class GiveAdviceHandler(webapp2.RequestHandler):
         post = GiveAdvicePost(title=title,content=content)
         post.put()
         #3.
-        #self.redirect( '/advice?key=' + advice.key.urlsafe() )
-        return self.redirect('/advice')
+        self.redirect( '/postoutline?key=' + post.key.urlsafe() )
+        #return self.redirect('/advice')
 
 
 
@@ -121,10 +121,12 @@ class AdviceHandler(webapp2.RequestHandler):
 
 class PostOutlineHandler(webapp2.RequestHandler):
     def get(self):
-
+        post_key_urlsafe = self.request.get('key')
+        post_key = ndb.Key(urlsafe=post_key_urlsafe)
+        post = post_key.get()
 
         template = env.get_template('post_outline.html')
-        variables = {}
+        variables = {'post': post}
         self.response.write(template.render(variables))
 
 
@@ -140,7 +142,7 @@ class Categories(ndb.Model):
 
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('tag.html')
+        template = env.get_template('category.html')
         variables = {}
         self.response.write(template.render(variables))
     def post(self):
@@ -156,7 +158,7 @@ app = webapp2.WSGIApplication([
     ('/giveadvice', GiveAdviceHandler),
     ('/advice', AdviceHandler),
     ('/category', CategoryHandler),
-    ('/postoutile', PostOutlineHandler),
+    ('/postoutline', PostOutlineHandler),
     #('/redirect', RedirectHandler)
     #('/fawk', FawkHandler)
 ], debug=True)
