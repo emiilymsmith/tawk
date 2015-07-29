@@ -31,15 +31,6 @@ class FawkHandler(webapp2.RequestHandler):
         return self.redirect("/fawk")
 """
 
-"""
-#tbd
-class RatingHandler(webapp2.RequestHandler):
-    def get(self):
-"""
-
-
-
-
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
     def get(self):

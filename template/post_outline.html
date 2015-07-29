@@ -3,7 +3,8 @@
 <html>
   <head>
     <!--  linking the style.css to post_outline.html-->
-    <link href = "../static/post_outline.css" rel = "stylesheet">
+    <link href = "../static/post_outline.css" type = "text/css" rel = "stylesheet">
+    <script type="text/javascript" src="../static/post_outline.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
   <body>
@@ -34,9 +35,17 @@
     </nav>
     <div class=posts>
       <!-- Here we have a page for each post and its content -->
-      <h3> {{post.content}} <p>#<a href="/{{post.category}}"><strong>{{post.category}}</strong></p></h3>
+
+      <h3> {{post.content}}<p>#<a href="/{{post.category}}"><strong>{{post.category}}</strong></p></h3>
         <hr>
       <h4><a href="/postoutile?key={{post.key.urlsafe()}}"> {{user.nickname()}}</a></h4>
+    </div>
+
+    <div class="box">
+
+        <input id="qty" value="0" />
+        <button id="down" onclick="modify_qty(-1)">-1</button>
+        <button id="up" onclick="modify_qty(1)">+1</button>
     </div>
 
   </body>
