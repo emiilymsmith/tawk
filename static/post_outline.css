@@ -6,6 +6,17 @@ body {
   font-family: "Fjalla One", sans-serif;
 }
 
+/* Links to Users */
+a {
+  text-decoration: none;
+  color: #777;
+  transition: color 0.25s;
+}
+
+a:hover {
+  color: #ccc;
+}
+
 h1 {
   background-color: #fff;
   position:absolute;
@@ -34,6 +45,32 @@ h2 {
     left:15px;
     bottom:0px;
   }
+
+/* Post Content */
+h3 {
+
+}
+
+/* Changes properties of the <strong> tag*/
+strong {
+  color: #555;
+  transition: color 0.25s;
+}
+
+strong:hover{
+  color: #ccc;
+}
+
+/* Post content */
+.posts {
+  text-align: center;
+}
+
+/* Horizontal bar after each post */
+hr {
+  color: #f6f6f6;
+  width:20%;
+}
 
 /* HEADER SECTION */
 
