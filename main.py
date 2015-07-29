@@ -99,13 +99,13 @@ class SubmitAdviceHandler(webapp2.RequestHandler):
         content = self.request.get('content')
         category = self.request.get('category')
 
-        #category = self. I need a way for what they choose to be put here.
+        #category = self. I need a way for what they choose, to be put here.
         post = GiveAdvicePost(title=title,content=content,category=category)
         post.put()
-        self.response.write("Your request has been submitted")
+        self.response.write("Your advice has been submitted")
+        #return self.redirect('/redirect')
+##### help now I want it to go to advice.html
 
-####how do I give them a notice that their advice has been submitted,
-####and to go o a page that says sumbit more.
 
 
 # for the home page of advice posts
@@ -114,6 +114,10 @@ class AdviceHandler(webapp2.RequestHandler):
         template = env.get_template('advice.html')
         variables = {}
         self.response.write(template.render(variables))
+
+    def post(self):
+        pass
+
 
 class PostOutlineHandler(webapp2.RequestHandler):
     def get(self):
@@ -137,6 +141,7 @@ app = webapp2.WSGIApplication([
     ('/giveadvice', SubmitAdviceHandler),
     ('/advice', AdviceHandler),
     ('/tag', CategoryHandler),
-    ('/postoutile', PostOutlineHandler)
+    ('/postoutile', PostOutlineHandler),
+    #('/redirect', RedirectHandler)
     #('/fawk', FawkHandler)
 ], debug=True)
