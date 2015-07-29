@@ -95,11 +95,13 @@ class GiveAdviceHandler(webapp2.RequestHandler):
         self.response.write(template.render(variables))
 
     def post(self):
+        #1.
         title = self.request.get('title')
         content = self.request.get('content')
-
+        #2.
         post = GiveAdvicePost(title=title,content=content)
         post.put()
+        #3.
         #self.redirect( '/advice?key=' + advice.key.urlsafe() )
         return self.redirect('/advice')
 
@@ -114,6 +116,7 @@ class AdviceHandler(webapp2.RequestHandler):
 
     def post(self):
         advice = GiveAdvicePost.query().fetch()
+
 
 
 class PostOutlineHandler(webapp2.RequestHandler):
@@ -152,7 +155,7 @@ app = webapp2.WSGIApplication([
     ('/user', UserHandler),
     ('/giveadvice', GiveAdviceHandler),
     ('/advice', AdviceHandler),
-    ('/tag', CategoryHandler),
+    ('/category', CategoryHandler),
     ('/postoutile', PostOutlineHandler),
     #('/redirect', RedirectHandler)
     #('/fawk', FawkHandler)
