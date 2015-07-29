@@ -3,12 +3,40 @@
 <html>
   <head>
     <!--  linking the style.css to tag.html-->
-    <link href = "../static/style.css" rel = "stylesheet">
+    <link href = "../static/tag.css" rel = "stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
   <body>
+    <div class="container">
+      <div class="header">
+        <h1>{{category}}<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
+      </div>
+    </div>
+    <nav class="menu">
+      <ul class="active">
+          <li><a href="/" id=nav-tawk>TAWK<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="23px" width="23px" class="mouth"></a></li>
+          <li><a href="#">Advice</a>
+            <ul class="sub-menu">
+              <li><a href="/advice">Get</a>
+              <li><a href="/giveadvice">Give</a>
+            </ul>
+          </li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="#"><img src="http://png.findicons.com/files/icons/2166/oxygen/48/user_female.png" height="32px" width="32px" class="profile"></a>
+            <ul class="sub-menu" id=profile>
+              <li><a href="/user">Profile</a>
+              <li><a href="/">Login</a>
+            </ul>
+          </li>
+      </ul>
+
+      <a class="toggle-nav" href="#">&#9776;</a>
+    </nav>
     <!-- brings up the category, under which you get the title of each post with said category -->
-    <h1> {{category}} </h1>
-    <h3>{{post.title}}</h3>
+    {% for post in post %}
+    <!--  link to be added-->
+    <h2><a href="/postoutile?key={{post.key.urlsafe()}}">{{post.title}}</a></h2>
+      {% endfor %}
 
   </body>
 </html>

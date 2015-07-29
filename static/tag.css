@@ -7,7 +7,6 @@ body {
 }
 
 h1 {
-  background-color: #fff;
   position:absolute;
   text-align:center;
   width:100%;
@@ -16,6 +15,7 @@ h1 {
   color: #000;
   font-family: "Fjalla One", sans-serif;
   font-size:100px;
+  text-transform: uppercase;
 }
 
 /* These are the two buttons on the home page~ */
@@ -49,9 +49,9 @@ h2 {
 
 /* PHOTO BEHIND "TAWK" */
 .container {
-  /*background-image: url("https://lh3.googleusercontent.com/-lDvZdONQJ6Q/VbQbgfH_feI/AAAAAAAAAWc/5nvm4RHIyMU/w426-h568/15%2B-%2B1");
+  /*background-image: url("http://hdwallpapers360.com/wp-content/uploads/city-hazy-blurred-unsharp-night-rain-1920x1080.jpg");
   background-size:cover;*/
-  background-color: #000;
+  /*background-color: #000;*/
   position:relative;
   height:30vh;
 }
