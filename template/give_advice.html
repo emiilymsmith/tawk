@@ -2,17 +2,42 @@
 <html>
   <head>
     <!--  linking to sytlesheet-->
-    <link href = "../static/style.css" rel = "stylesheet">
+    <link href = "../static/give.css" rel = "stylesheet">
   </head>
   <body>
     <!--  title of page, main title-->
-    <h1> Give Advice</h1>
-    <h3>TAWK about it</h3>
+    <div class="container">
+      <div class="header">
+        <h1>Give Advice<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
+      </div>
+    </div>
+    <nav class="menu">
+      <ul class="active">
+          <li><a href="/" id=nav-tawk>TAWK<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="23px" width="23px" class="mouth"></a></li>
+          <li><a href="#">Advice</a>
+            <ul class="sub-menu">
+              <li><a href="/advice">Get</a>
+              <li><a href="/giveadvice">Give</a>
+            </ul>
+          </li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="#"><img src="http://png.findicons.com/files/icons/2166/oxygen/48/user_female.png" height="32px" width="32px" class="profile"></a>
+            <ul class="sub-menu" id=profile>
+              <li><a href="/user">Profile</a>
+              <li><a href="/">Login</a>
+            </ul>
+          </li>
+      </ul>
+
+      <a class="toggle-nav" href="#">&#9776;</a>
+    </nav>
+    <h3>TAWK About It!</h3>
     <!--  the form to submit a piece of advice to the database - has title, content, and category-->
     <form action="/giveadvice" method="POST">
-      <p><input name = "title" type = "text" placeholder = "Title of Post"/></p>
-      <p><textarea name = "content" rows = "15" placeholder = "Give me S.U.M. advice, TAWK about it!"></textarea></p>
-      <p><input name = "category" type = "text" placeholder = "Category"/></p>
-      <p><input type="submit"/></p>
+      <p class=title><input name = "title" type = "text" placeholder = "Title of Post"/></p>
+      <p class=content><textarea name = "content" rows = "15" placeholder = "Give me S.U.M. advice, TAWK about it!"></textarea></p>
+      <p class=tag><input name = "category" type = "text" placeholder = "Category"/></p>
+      <p class=button><input type="submit"/></p>
+    </form>
   </body>
 </html>
