@@ -64,7 +64,6 @@ class LoginHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-
 #opens /about us
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
@@ -73,22 +72,23 @@ class AboutHandler(webapp2.RequestHandler):
         self.response.write(template.render(variables))
 
 #users database with username and passwords
-class User(ndb.Model):
-    username = ndb.StringProperty(required=True)
-    password = ndb.StringProperty(required=True)
+# class User(ndb.Model):
+#     username = ndb.StringProperty(required=True)
+#     password = ndb.StringProperty(required=True)
 
 #new database for a "give advice" post
 class GiveAdvicePost(ndb.Model):
     title = ndb.StringProperty(required=True)
     content = ndb.TextProperty(required=True)
-    user_key = ndb.KeyProperty(kind=User)
+    category = ndb.StringProperty(required=True)
+    user = ndb.UserProperty(required=True)
 
 #connects to /user
 class UserHandler(webapp2.RequestHandler):
     def get(self):
-        user_key_urlsafe = self.request.get('key')
-        user_key = ndb.Key(urlsafe=user_key_urlsafe)
-        user = user_key.get()
+        # user_key_urlsafe = self.request.get('key')
+        # user_key = ndb.Key(urlsafe=user_key_urlsafe)
+        user = users.get_current_user()
 
         template = env.get_template('user.html')
         variables = {}
@@ -106,8 +106,11 @@ class GiveAdviceHandler(webapp2.RequestHandler):
         #1.
         title = self.request.get('title')
         content = self.request.get('content')
+        category = self.request.get('category')
+        user = users.get_current_user()
+
         #2.
-        post = GiveAdvicePost(title=title,content=content)
+        post = GiveAdvicePost(title=title,content=content,category=category,user=user)
         post.put()
         #3.
         self.redirect( '/postoutline?key=' + post.key.urlsafe() )
@@ -120,8 +123,10 @@ class PostOutlineHandler(webapp2.RequestHandler):
         post_key = ndb.Key(urlsafe=post_key_urlsafe)
         post = post_key.get()
 
+        user = users.get_current_user()
+
         template = env.get_template('post_outline.html')
-        variables = {'post': post}
+        variables = {'post': post,'user':user}
         self.response.write(template.render(variables))
 
 # for the home page of advice posts

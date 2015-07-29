@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>{{user}}'s post<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
+        <h1>{{user.nickname()}}'s post<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
       </div>
     </div>
     <nav class="menu">
@@ -36,7 +36,7 @@
       <!-- Here we have a page for each post and its content -->
       <h3> {{post.content}} <p>#<a href="/{{post.category}}"><strong>{{post.category}}</strong></p></h3>
         <hr>
-      <h4><a href="/postoutile?key={{post.key.urlsafe()}}"> {{user}}</a></h4>
+      <h4><a href="/postoutile?key={{post.key.urlsafe()}}"> {{user.nickname()}}</a></h4>
     </div>
 
   </body>
