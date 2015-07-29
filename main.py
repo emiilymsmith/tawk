@@ -2,6 +2,8 @@ import webapp2
 import jinja2
 from google.appengine.ext import ndb
 from google.appengine.api import users
+from google.appengine.api import urlfetch
+
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
 
@@ -35,10 +37,9 @@ class RatingHandler(webapp2.RequestHandler):
     def get(self):
 """
 
-"""
-class Users(ndb.Model):
-    username = ndb.StringProperty(required=True)
-"""
+
+
+
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
     def get(self):
@@ -71,20 +72,27 @@ class AboutHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-
-#connects to /user
-class UserHandler(webapp2.RequestHandler):
-    def get(self):
-        template = env.get_template('user.html')
-        variables = {}
-        self.response.write(template.render(variables))
-
-
+#users database with username and passwords
+class User(ndb.Model):
+    username = ndb.StringProperty(required=True)
+    password = ndb.StringProperty(required=True)
 
 #new database for a "give advice" post
 class GiveAdvicePost(ndb.Model):
     title = ndb.StringProperty(required=True)
     content = ndb.TextProperty(required=True)
+    user_key = ndb.KeyProperty(kind=User)
+
+#connects to /user
+class UserHandler(webapp2.RequestHandler):
+    def get(self):
+        user_key_urlsafe = self.request.get('key')
+        user_key = ndb.Key(urlsafe=user_key_urlsafe)
+        user = user_key.get()
+
+        template = env.get_template('user.html')
+        variables = {}
+        self.response.write(template.render(variables))
 
 
 #handler for "giving advice"
@@ -106,24 +114,6 @@ class GiveAdviceHandler(webapp2.RequestHandler):
         #return self.redirect('/advice')
 
 
-
-# for the home page of advice posts
-class AdviceHandler(webapp2.RequestHandler):
-    def get(self):
-        advice_key_urlsafe = self.request.get('key')
-        advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
-        advice = advice_key.get()
-
-
-        template = env.get_template('advice.html')
-        variables = {'advice': advice}
-        self.response.write(template.render(variables))
-
-    def post(self):
-        advice = GiveAdvicePost.query().fetch()
-
-
-
 class PostOutlineHandler(webapp2.RequestHandler):
     def get(self):
         post_key_urlsafe = self.request.get('key')
@@ -134,16 +124,35 @@ class PostOutlineHandler(webapp2.RequestHandler):
         variables = {'post': post}
         self.response.write(template.render(variables))
 
+# for the home page of advice posts
+class AdviceHandler(webapp2.RequestHandler):
+    def get(self):
+
+        all_advice = GiveAdvicePost.query().fetch()
+
+
+        template = env.get_template('advice.html')
+        variables = {'all_advice': all_advice}
+        self.response.write(template.render(variables))
+
+
+# advice_key_urlsafe = self.request.get('key')
+# advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
+# advice = advice_key.get()
+# user_key = advice.user_key
+# user = user_key.get()
+
+# post = GiveAdvicePost(title=title,content=content)
+# advice_post = GiveAdvicePost.query( post.advice_key == advice_key ).fetch()
+#this is supposed to print the whole list of advice by using the keys
+
 
 class Categories(ndb.Model):
     family = ndb.StringProperty(required=True)
     friends = ndb.StringProperty(required=True)
     strangers = ndb.StringProperty(required=True)
     date = ndb.StringProperty(required=True)
-    strangers = ndb.StringProperty(required=True)
     general = ndb.StringProperty(required=True)
-
-
 
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):

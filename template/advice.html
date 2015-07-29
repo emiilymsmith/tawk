@@ -33,6 +33,12 @@
 
     <h1>It's not awkward unless you make it awkward!</h1>
 
+    <section>
+      {% for advice in all_advice %}
+        <h3><p>{{advice.title}}</p></h3>
+        <h5><p>{{advice.content}}</p></h5>
 
+      {% endfor %}
+    </section>
   </body>
 </html>
