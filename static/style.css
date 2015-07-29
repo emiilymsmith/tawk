@@ -7,10 +7,13 @@ body {
 }
 
 h1 {
+  background-color: #fff;
   position:absolute;
   text-align:center;
   width:100%;
-  color: #fff;
+/*  width:20%;
+  left:38%; */
+  color: #000;
   font-family: "Fjalla One", sans-serif;
   font-size:100px;
 }
@@ -46,8 +49,9 @@ h2 {
 
 /* PHOTO BEHIND "TAWK" */
 .container {
-  background-image: url("http://blog.hfccountertops.com/wp-content/uploads/2015/02/SteelGreenGrey.jpg");
-  background-size:cover;
+  /*background-image: url("http://hdwallpapers360.com/wp-content/uploads/city-hazy-blurred-unsharp-night-rain-1920x1080.jpg");
+  background-size:cover;*/
+  /*background-color: #000;*/
   position:relative;
   height:30vh;
 }

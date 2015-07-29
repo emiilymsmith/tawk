@@ -18,3 +18,7 @@ $(document).click(function(){
 $(".menu").click(function(e){
   e.stopPropagation();
 });
+
+// One page scrolling!!!! :O
+
+$(".main").onepage_scroll();
