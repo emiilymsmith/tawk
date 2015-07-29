@@ -294,8 +294,9 @@ input, textarea {
 
 .button {
   position:relative;
-  width:35%;
-  left:33%;
+  width:33%;
+  left:34%;
+  vertical-align: middle;
 }
 
 input:hover, textarea:hover {

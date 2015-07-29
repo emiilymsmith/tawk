@@ -6,6 +6,17 @@ body {
   font-family: "Fjalla One", sans-serif;
 }
 
+/* Links to Posts */
+a {
+  text-decoration: none;
+  color: #000;
+  transition: color 0.25s;
+}
+
+a:hover {
+  color: #505050;
+}
+
 h1 {
   position:absolute;
   text-align:center;
@@ -16,6 +27,7 @@ h1 {
   font-family: "Fjalla One", sans-serif;
   font-size:100px;
   text-transform: uppercase;
+  background-color: #fff;
 }
 
 /* These are the two buttons on the home page~ */
@@ -34,6 +46,18 @@ h2 {
     bottom:0px;
   }
 
+/* Posts */
+.posts {
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Horizontal bar after each post */
+hr {
+  color: #f6f6f6;
+  width:20%;
+}
+
 /* HEADER SECTION */
 
 /*
@@ -51,7 +75,7 @@ h2 {
 .container {
   /*background-image: url("http://hdwallpapers360.com/wp-content/uploads/city-hazy-blurred-unsharp-night-rain-1920x1080.jpg");
   background-size:cover;*/
-  /*background-color: #000;*/
+  background-color: #000;*/
   position:relative;
   height:30vh;
 }
