@@ -6,6 +6,15 @@ body {
   font-family: "Fjalla One", sans-serif;
 }
 
+h1 {
+  position:absolute;
+  text-align:center;
+  width:100%;
+  color: #fff;
+  font-family: "Fjalla One", sans-serif;
+  font-size:100px;
+}
+
 /* These are the two buttons on the home page~ */
 h2 {
   color:#fff;
@@ -23,21 +32,35 @@ h2 {
   }
 
 /* HEADER SECTION */
+
+/*
 .header {
   position:absolute;
   text-align:center;
   width:100%;
   color: #fff;
   font-family: "Fjalla One", sans-serif;
-  font-size:150px;
+  font-size:100px;
 }
+*/
 
 /* PHOTO BEHIND "TAWK" */
 .container {
-  background-image: url("https://findingdelightdotcom.files.wordpress.com/2014/03/toast.jpg");
+  background-image: url("http://blog.hfccountertops.com/wp-content/uploads/2015/02/SteelGreenGrey.jpg");
   background-size:cover;
   position:relative;
-  height:95vh;
+  height:30vh;
+}
+
+#nav-tawk {
+  font-family: "Fjalla One", sans-serif;
+  font-size: 25px;
+  color: #000;
+  text-shadow:0px 1px 0px rgba(0,0,0,0.5);
+}
+
+#nav-tawk:hover {
+  color: #fff;
 }
 
 /* NAVIGATION!!! */
@@ -50,10 +73,12 @@ h2 {
 @media screen and (min-width: 860px) {
     .menu {
         width:fixed;
+        padding-left: 25px;
         padding:10px 18px;
         box-shadow:0px 1px 1px rgba(0,0,0,0.15);
         border-radius:3px;
-        background:#333;
+        background:#eee;
+        text-align: center;
     }
 }
 
@@ -69,7 +94,8 @@ h2 {
     margin:0px 50px 0px 0px;
     float:left;
     list-style:none;
-    font-size:17px;
+    font-size:25px;
+    text-align: center;
 }
 
 .menu li:last-child {
@@ -81,7 +107,7 @@ h2 {
     color:#888;
     transition:color linear 0.15s;
     text-decoration: none;
-    font-family: 'Ropa Sans', sans-serif;
+    font-family: "Fjalla One", sans-serif;
 }
 
 .menu a:hover, .menu .current-item a {
@@ -165,7 +191,8 @@ h2 {
     float:left;
     display:inline-block;
     position:relative;
-    font-size:19px;
+    font-size:25px;
+    text-transform: uppercase;
 }
 
 .menu > ul > li > a {
