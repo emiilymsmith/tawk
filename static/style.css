@@ -60,7 +60,7 @@ h2 {
 }
 
 #nav-tawk:hover {
-  color: #fff;
+  color: #999;
 }
 
 /* NAVIGATION!!! */
@@ -112,7 +112,7 @@ h2 {
 
 .menu a:hover, .menu .current-item a {
     text-decoration:none;
-    color:#fff;
+    color:#333;
 }
 
 /*----- Responsive -----*/
@@ -181,7 +181,7 @@ h2 {
 
     .toggle-nav:hover, /*.toggle-nav.active*/ {
         text-decoration:none;
-        color:#888;
+        color:#999;
     }
 
 }
@@ -212,11 +212,11 @@ h2 {
 }
 
 .sub-menu {
-    width:120%;
+    width:100%;
     padding:5px 0px;
     position:absolute;
     top:100%;
-    left:0px;
+    left:0;
     z-index:-1;
     opacity:0;
     transition:opacity linear 0.15s;
@@ -228,6 +228,7 @@ h2 {
     display:block;
     font-size:16px;
     width:100%;
+    text-align: center;
 }
 
 .sub-menu li a {
@@ -237,4 +238,66 @@ h2 {
 
 .sub-menu li a:hover, .sub-menu .current-item a {
     background:#333;
+    color:#ddd;
+}
+
+/* GET/GIVE BOXES!!! */
+.get a {
+  color:#fff;
+  background-color: #000;
+  text-transform: uppercase;
+  float:left;
+  text-decoration: none;
+  border-style: double;
+  border-color: #888;
+  margin-top:30px;
+  padding: 15px;
+  padding-top: 150px;
+  padding-bottom:150px;
+  font-size: 50px;
+  width:30%;
+  height:auto;
+  margin-left:15%;
+  text-align: center;
+  transition:background-color linear 0.25s, color linear 0.25s;
+}
+
+.get a:hover, .give a:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+.give a {
+  color: #fff;
+  background-color: #000;
+  text-transform: uppercase;
+  float:right;
+  text-decoration: none;
+  border-style:double;
+  border-color: #888;
+  margin-top:30px;
+  padding: 15px;
+  padding-top: 150px;
+  padding-bottom:150px;
+  font-size: 50px;
+  width:30%;
+  height: auto;
+  margin-right: 15%;
+  text-align: center;
+  transition:background-color linear 0.25s, color linear 0.25s;
+}
+
+/* Profile Icon */
+.profile {
+  transition:opacity linear 0.25s;
+}
+
+.profile:hover {
+  opacity: 0.8;
+}
+
+#profile {
+  width:145%;
+  left:-22%;
+  text-align:left;
 }
