@@ -34,19 +34,19 @@
     <h3>TAWK About It!</h3>
     <!--  the form to submit a piece of advice to the database - has title, content, and category-->
     <form action="/giveadvice" method="POST">
-      <p class=title><input name = "title" type = "text" placeholder = "Title of Post"/></p>
-      <p class=content><textarea name = "content" rows = "15" placeholder = "Give me S.U.M. advice, TAWK about it!"></textarea></p>
-
-      Tags
-      <p><input type="radio" name="tag" value="family" checked>Family
-         <input type="radio" name="tag" value="friends">Friends
+      <p><input name = "title" type = "text" placeholder = "Title of Post" class=box /></p>
+      <p><textarea name = "content" rows = "15" placeholder = "Give me S.U.M. advice, TAWK about it!" class=box></textarea></p>
+      <div class=tags>
+      <p class=tag-name>TAGS</p>
+      <p><input type="radio" name="tag" value="family" checked>  Family
+         <input type="radio" name="tag" value="friends">  Friends
          <br>
-         <input type="radio" name="tag" value="dates">Dates
-         <input type="radio" name="tag" value="strangers">Strangers
+         <input type="radio" name="tag" value="dates">  Dates
+         <input type="radio" name="tag" value="strangers">  Strangers
          <br>
-         <input type="radio" name="tag" value="general">General
-
-      <p class=button><input type="submit"/></p>
+         <input type="radio" name="tag" value="general">  General
+      </div>
+      <p><input type="submit" class=box id=submit /></p>
     </form>
   </body>
 </html>
