@@ -110,8 +110,13 @@ class GiveAdviceHandler(webapp2.RequestHandler):
 # for the home page of advice posts
 class AdviceHandler(webapp2.RequestHandler):
     def get(self):
+        advice_key_urlsafe = self.request.get('key')
+        advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
+        advice = advice_key.get()
+
+
         template = env.get_template('advice.html')
-        variables = {}
+        variables = {'advice': advice}
         self.response.write(template.render(variables))
 
     def post(self):
