@@ -291,7 +291,7 @@ form {
     /*background: rgba(255,255,255,0.5);*/
     margin: 0 0 10px 0;
     width:15%;
-    transition: background-color 0.05s;
+    transition: background-color 0.15s;
 }
 
 .box:hover {
@@ -319,9 +319,49 @@ form {
 /* TAGS!! */
 .tags {
   margin-top: -10px;
+  text-align: center;
 }
 
 .tag-name {
   margin-top: -20px;
-  margin-bottom: -15px;
+  margin-bottom: -1px;
+  font-size: 30px;
 }
+
+table {
+  text-align:justify;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Radio button?? */
+
+input[type=radio].css-checkbox {
+							position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+						}
+
+						input[type=radio].css-checkbox + label.css-label {
+							padding-left:23px;
+							height:18px;
+							display:inline-block;
+							line-height:18px;
+							background-repeat:no-repeat;
+							background-position: 0 0;
+							font-size:18px;
+							vertical-align:middle;
+							cursor:pointer;
+
+						}
+
+						input[type=radio].css-checkbox:checked + label.css-label {
+							background-position: 0 -18px;
+						}
+						label.css-label {
+				background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_c29a9ecb47dc756efc44124aafdc05ab.png);
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
