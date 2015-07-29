@@ -6,11 +6,26 @@
     <link href = "../static/post_outline.css" type = "text/css" rel = "stylesheet">
     <script type="text/javascript" src="../static/post_outline.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+          $("#up").click(function(){
+              $(".box").hide();
+          });
+      });
+      function modify_qty(val) {
+          var qty = document.getElementById('qty').value;
+          var new_qty = parseInt(qty,10) + val;
+
+
+          document.getElementById('qty').value = new_qty;
+          return new_qty;
+      }
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>{{user.nickname()}}'s post<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
+        <h1>{{user}}'s post<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
       </div>
     </div>
     <nav class="menu">
@@ -35,10 +50,9 @@
     </nav>
     <div class=posts>
       <!-- Here we have a page for each post and its content -->
-
       <h3> {{post.content}}<p>#<a href="/{{post.category}}"><strong>{{post.category}}</strong></p></h3>
         <hr>
-      <h4><a href="/postoutile?key={{post.key.urlsafe()}}"> {{user.nickname()}}</a></h4>
+      <h4><a href="/postoutile?key={{post.key.urlsafe()}}"> {{user}}</a></h4>
     </div>
 
     <div class="box">
@@ -47,6 +61,7 @@
         <button id="down" onclick="modify_qty(-1)">-1</button>
         <button id="up" onclick="modify_qty(1)">+1</button>
     </div>
+
 
   </body>
 </html>
