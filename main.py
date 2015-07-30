@@ -6,7 +6,15 @@ from google.appengine.api import urlfetch
 
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
+# advice_key_urlsafe = self.request.get('key')
+# advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
+# advice = advice_key.get()
+# user_key = advice.user_key
+# user = user_key.get()
 
+# post = GiveAdvicePost(title=title,content=content)
+# advice_post = GiveAdvicePost.query( post.advice_key == advice_key ).fetch()
+#this is supposed to print the whole list of advice by using the keys
 """
 #for posts on fawk
 class Post(ndb.Model):
@@ -70,19 +78,19 @@ class GiveAdvicePost(ndb.Model):
     content = ndb.TextProperty(required=True)
     category = ndb.StringProperty(required=True)
     user = ndb.UserProperty(required=True)
+    userID = ndb.StringProperty(required=True)
 
 #connects to /user
 class UserHandler(webapp2.RequestHandler):
     def get(self):
-        user = users.get_current_user()
-        short_user = user.email().partition('@')[0].capitalize()
-
-        all_posts = GiveAdvicePost.query().fetch()
-        url_category = self.request.get('tag')
-        all_advice = GiveAdvicePost.query(GiveAdvicePost.category==url_category).fetch()
+        current_user = users.get_current_user()
+        short_user = current_user.email().partition('@')[0].capitalize()
+        # query all posts, for the logged in user by matching the user
+        #id we saved when they created a post
+        users_advice = GiveAdvicePost.query(GiveAdvicePost.userID==current_user.user_id()).fetch()
 
         template = env.get_template('user.html')
-        variables = {'short_user':short_user}
+        variables = {'short_user':short_user,'users_advice':users_advice}
         self.response.write(template.render(variables))
 
 
@@ -99,9 +107,10 @@ class GiveAdviceHandler(webapp2.RequestHandler):
         content = self.request.get('content')
         category = self.request.get('category')
         user = users.get_current_user()
+        userID = user.user_id()
 
         #2.
-        post = GiveAdvicePost(title=title,content=content,category=category,user=user)
+        post = GiveAdvicePost(title=title,content=content,category=category,user=user,userID=userID)
         post.put()
         #3.
         self.redirect( '/postoutline?key=' + post.key.urlsafe() )
@@ -135,18 +144,6 @@ class AdviceHandler(webapp2.RequestHandler):
         variables = {'categories':sorted(categories)}
         self.response.write(template.render(variables))
 
-
-# advice_key_urlsafe = self.request.get('key')
-# advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
-# advice = advice_key.get()
-# user_key = advice.user_key
-# user = user_key.get()
-
-# post = GiveAdvicePost(title=title,content=content)
-# advice_post = GiveAdvicePost.query( post.advice_key == advice_key ).fetch()
-#this is supposed to print the whole list of advice by using the keys
-
-
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):
         url_category = self.request.get('tag')
@@ -162,9 +159,6 @@ class CategoryHandler(webapp2.RequestHandler):
                      'category_from_post':category_from_post,
                      'url_category': url_category}
         self.response.write(template.render(variables))
-
-
-
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
