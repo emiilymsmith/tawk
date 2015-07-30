@@ -148,12 +148,18 @@ class AdviceHandler(webapp2.RequestHandler):
 
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):
-        all_advice = GiveAdvicePost.query().fetch()
-
-
+        url_category = self.request.get('tag')
+        all_advice = GiveAdvicePost.query(GiveAdvicePost.category==url_category).fetch()
+        categories = set() #different type of list where I can have multiple of the same title
+        for post in all_advice:
+            category_from_post = post.category
+            categories.add(category_from_post)
 
         template = env.get_template('category.html')
-        variables = {'all_advice': all_advice}
+        variables = {'all_advice': all_advice,
+                     'categories':sorted(categories),
+                     'category_from_post':category_from_post,
+                     'url_category': url_category}
         self.response.write(template.render(variables))
 
 
