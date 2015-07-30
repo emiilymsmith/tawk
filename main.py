@@ -46,6 +46,7 @@ class LoginHandler(webapp2.RequestHandler):
         if user:
             greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
                         (user.nickname(), users.create_logout_url('/')))
+                        #.nickname uses the gmails profile name
         else:
             greeting = ('<a href="%s">Sign in or register</a>.' %
                         users.create_login_url('/'))
@@ -123,12 +124,14 @@ class PostOutlineHandler(webapp2.RequestHandler):
 # for the home page of advice posts
 class AdviceHandler(webapp2.RequestHandler):
     def get(self):
-
-        all_advice = GiveAdvicePost.query().fetch()
-
+        all_posts = GiveAdvicePost.query().fetch()
+        categories = set() #different type of list where I can have multiple of the same title
+        for post in all_posts:
+            category_from_post = post.category
+            categories.add(category_from_post)
 
         template = env.get_template('advice.html')
-        variables = {'all_advice': all_advice}
+        variables = {'categories':sorted(categories)}
         self.response.write(template.render(variables))
 
 
@@ -143,20 +146,16 @@ class AdviceHandler(webapp2.RequestHandler):
 #this is supposed to print the whole list of advice by using the keys
 
 
-class Categories(ndb.Model):
-    family = ndb.StringProperty(required=True)
-    friends = ndb.StringProperty(required=True)
-    strangers = ndb.StringProperty(required=True)
-    date = ndb.StringProperty(required=True)
-    general = ndb.StringProperty(required=True)
-
 class CategoryHandler(webapp2.RequestHandler):
     def get(self):
+        all_advice = GiveAdvicePost.query().fetch()
+
+
+
         template = env.get_template('category.html')
-        variables = {}
+        variables = {'all_advice': all_advice}
         self.response.write(template.render(variables))
-    def post(self):
-        pass
+
 
 
 

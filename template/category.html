@@ -35,11 +35,20 @@
     </nav>
     <div class=posts>
       <!-- brings up the category, under which you get the title of each post with said category -->
-      {% for post in post %}
-      <!--  link to be added-->
-      <h2><a href="/postoutile?key={{post.key.urlsafe()}}">{{post.title}}</a></h2>
-      <hr>
+      <!-- {% for post in post %}
+      <!-  link to be added-->
+      <!-- <h2><a href="/postoutile?key={{post.key.urlsafe()}}">{{post.title}}</a></h2>
+      <hr> -->
         {% endfor %}
+         -->
+        <section>
+          {% for advice in all_advice %}
+            <h3><p>{{advice.title}}</p></h3>
+            <h5><p>{{advice.content}}</p></h5>
+
+          {% endfor %}
+        </section>
+
     </div>
   </body>
 </html>
