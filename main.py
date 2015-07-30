@@ -15,29 +15,7 @@ env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
 # post = GiveAdvicePost(title=title,content=content)
 # advice_post = GiveAdvicePost.query( post.advice_key == advice_key ).fetch()
 #this is supposed to print the whole list of advice by using the keys
-"""
-#for posts on fawk
-class Post(ndb.Model):
-    content = ndb.StringProperty(required=True)
-    username = ndb.StringProperty(required=True)
 
-
-# '/fawk'
-class FawkHandler(webapp2.RequestHandler):
-    def get(self):
-        posts = Post.query().fetch() #list of post objects from ndb model
-        posts.sort()#by what though
-        template = env.get_template('fawk.html')
-        variables = {'posts': posts}
-        self.response.write(template.render(variables))
-
-    def post(self):
-        content = self.request.get('content')
-        username = self.request.get('username')
-        fawk_post = Post(content=content,username=username)
-        fawk_post.put()
-        return self.redirect("/fawk")
-"""
 
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
@@ -149,17 +127,42 @@ class CategoryHandler(webapp2.RequestHandler):
     def get(self):
         url_category = self.request.get('tag')
         all_advice = GiveAdvicePost.query(GiveAdvicePost.category==url_category).fetch()
+
+        current_user = users.get_current_user()
+        short_user = current_user.email().partition('@')[0].capitalize()
+
         categories = set() #different type of list where I can have multiple of the same title
         for post in all_advice:
             category_from_post = post.category
             categories.add(category_from_post)
-
         template = env.get_template('category.html')
         variables = {'all_advice': all_advice,
                      'categories':sorted(categories),
                      'category_from_post':category_from_post,
                      'url_category': url_category}
         self.response.write(template.render(variables))
+
+#for posts on fawk
+class Post(ndb.Model):
+    content = ndb.StringProperty(required=True)
+    username = ndb.StringProperty(required=True)
+
+
+# '/fawk'
+class FawkHandler(webapp2.RequestHandler):
+    def get(self):
+        posts = Post.query().fetch() #list of post objects from ndb model
+        posts.sort()#by what though
+        template = env.get_template('fawk.html')
+        variables = {'posts': posts}
+        self.response.write(template.render(variables))
+
+    def post(self):
+        content = self.request.get('content')
+        username = self.request.get('username')
+        fawk_post = Post(content=content,username=username)
+        fawk_post.put()
+        return self.redirect("/fawk")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
@@ -170,6 +173,5 @@ app = webapp2.WSGIApplication([
     ('/advice', AdviceHandler),
     ('/category', CategoryHandler),
     ('/postoutline', PostOutlineHandler),
-    #('/redirect', RedirectHandler)
-    #('/fawk', FawkHandler)
+    ('/fawk', FawkHandler)
 ], debug=True)
