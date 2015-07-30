@@ -334,3 +334,9 @@ hr {
   color: #f6f6f6;
   width:20%;
 }
+.logoutLblPos{
+
+   position:fixed;
+   right:10px;
+   bottom:5px;
+}
