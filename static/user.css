@@ -337,6 +337,7 @@ h4 {
 
 .content {
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 /* Horizontal bar after each post */

@@ -403,3 +403,7 @@ button:hover, button:active, button:focus {
 .category {
   font-family: "Fjalla One", sans-serif;
 }
+
+.content {
+  word-wrap: break-word;
+}
