@@ -66,6 +66,7 @@ h5 {
   margin-left: 35%;
   width:30%;
   color:#333;
+  text-transform: lowercase;
 }
 
 /* Horizontal bar after each post */
