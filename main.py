@@ -81,9 +81,9 @@ class UserHandler(webapp2.RequestHandler):
         # user_key_urlsafe = self.request.get('key')
         # user_key = ndb.Key(urlsafe=user_key_urlsafe)
         user = users.get_current_user()
-        short_user = user.nickname()
+        short_user = user.email().partition('@')[0].capitalize()
         template = env.get_template('user.html')
-        variables = {}
+        variables = {'short_user':short_user}
         self.response.write(template.render(variables))
 
 
@@ -116,9 +116,11 @@ class PostOutlineHandler(webapp2.RequestHandler):
         post = post_key.get()
 
         user = users.get_current_user()
+        short_user = user.email().partition('@')[0]
+        #separated the email by @ and prints index 0 or everything before the @
 
         template = env.get_template('post_outline.html')
-        variables = {'post': post,'user':user}
+        variables = {'post': post,'short_user': short_user}
         self.response.write(template.render(variables))
 
 # for the home page of advice posts
