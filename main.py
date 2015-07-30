@@ -56,6 +56,8 @@ class UserHandler(webapp2.RequestHandler):
         # query all posts, for the logged in user by matching the user
         #id we saved when they created a post
         users_advice = GiveAdvicePost.query(GiveAdvicePost.userID==current_user.user_id()).fetch()
+        users_fawks = GiveAdvicePost.query(FawkPost.userID==current_user.user_id()).fetch()
+
         logout_url = users.create_logout_url('/')
         template = env.get_template('user.html')
         variables = {'short_user':short_user,'users_advice':users_advice,'logout_url':logout_url}
@@ -132,13 +134,16 @@ class CategoryHandler(webapp2.RequestHandler):
         self.response.write(template.render(variables))
 
 #for posts on fawk
-class Post(ndb.Model):
+class FawkPost(ndb.Model):
     content = ndb.StringProperty(required=True)
     username = ndb.StringProperty(required=True)
+    user = ndb.UserProperty(required=True)
+    userID = ndb.StringProperty(required=True)
+
 # '/fawk'
 class FawkHandler(webapp2.RequestHandler):
     def get(self):
-        posts = Post.query().fetch() #list of post objects from ndb model
+        posts = FawkPost.query().fetch() #list of post objects from ndb model
         posts.sort()#by what though
         template = env.get_template('fawk.html')
         variables = {'posts': posts}
@@ -146,10 +151,16 @@ class FawkHandler(webapp2.RequestHandler):
 
     def post(self):
         content = self.request.get('content')
-        username = self.request.get('username')
-        fawk_post = Post(content=content,username=username)
+        user = users.get_current_user()
+        userID = user.user_id()
+
+        fawk_post = FawkPost(content=content,user=user,userID=userID)
         fawk_post.put()
         return self.redirect("/fawk")
+
+#class FawkOTDHandler(webapp2.RequestHandler):
+#    def get(self):
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
