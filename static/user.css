@@ -319,6 +319,14 @@ h4 {
 
 .posts {
   text-align: center;
+  float:left;
+  margin-left: 30%;
+}
+
+.fawks {
+  text-align: center;
+  float:right;
+  margin-right: 30%;
 }
 
 .title {
