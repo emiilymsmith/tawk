@@ -81,7 +81,7 @@ class UserHandler(webapp2.RequestHandler):
         # user_key_urlsafe = self.request.get('key')
         # user_key = ndb.Key(urlsafe=user_key_urlsafe)
         user = users.get_current_user()
-
+        short_user = user.nickname()
         template = env.get_template('user.html')
         variables = {}
         self.response.write(template.render(variables))
