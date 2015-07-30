@@ -92,7 +92,8 @@ class UserHandler(webapp2.RequestHandler):
         template = env.get_template('user.html')
         variables = {'short_user':short_user,'users_advice':users_advice}
         self.response.write(template.render(variables))
-
+        logout_url = users.create_logout_url('/')
+        self.response.write('<a href ="%s" >Log Out</a>' % logout_url)
 
 #handler for "giving advice"
 class GiveAdviceHandler(webapp2.RequestHandler):
