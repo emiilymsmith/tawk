@@ -6,16 +6,6 @@ from google.appengine.api import urlfetch
 
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
-# advice_key_urlsafe = self.request.get('key')
-# advice_key = ndb.Key(urlsafe=advice_key_urlsafe)
-# advice = advice_key.get()
-# user_key = advice.user_key
-# user = user_key.get()
-
-# post = GiveAdvicePost(title=title,content=content)
-# advice_post = GiveAdvicePost.query( post.advice_key == advice_key ).fetch()
-#this is supposed to print the whole list of advice by using the keys
-
 
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
@@ -131,14 +121,14 @@ class CategoryHandler(webapp2.RequestHandler):
         short_user = current_user.email().partition('@')[0].capitalize()
 
         categories = set() #different type of list where I can have multiple of the same title
+        category_from_post = url_category
         for post in all_advice:
-            category_from_post = post.category
             categories.add(category_from_post)
         template = env.get_template('category.html')
         variables = {'all_advice': all_advice,
                      'categories':sorted(categories),
                      'category_from_post':category_from_post,
-                     'url_category': url_category
+                     'url_category': url_category,
                      'short_user':short_user}
         self.response.write(template.render(variables))
 
@@ -146,8 +136,6 @@ class CategoryHandler(webapp2.RequestHandler):
 class Post(ndb.Model):
     content = ndb.StringProperty(required=True)
     username = ndb.StringProperty(required=True)
-
-
 # '/fawk'
 class FawkHandler(webapp2.RequestHandler):
     def get(self):
