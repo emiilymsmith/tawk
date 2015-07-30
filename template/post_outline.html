@@ -47,7 +47,7 @@
     <div class=posts>
       <!-- Here we have a page for each post and its content -->
       <h2>{{post.title}}<h2>
-      <h3><p> {{post.content}}</p>
+      <h3><p>"{{post.content}}"</p>
         <p>#<a href="/{{post.category}}" class=category><strong>{{post.category}}</strong></p></h3>
         <hr>
       <h4><a href="/postoutline?key={{post.key.urlsafe()}}"> {{user}}</a></h4>

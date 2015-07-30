@@ -2,6 +2,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ropa+Sans);
 @import url(http://fonts.googleapis.com/css?family=Inconsolata);
 @import url(http://fonts.googleapis.com/css?family=Karla);
+@import url(http://fonts.googleapis.com/css?family=News+Cycle);
 
 /* APPLIES TO EVERYTHING WITHIN THE BODY TAGS */
 body {
@@ -56,11 +57,11 @@ h2 {
 }
 
 h5 {
-  font-family: 'Karla', sans-serif;
+  font-family: 'News Cycle', sans-serif;
   font-size: 16px;
   margin-left: 35%;
   width:30%;
-  color:#888;
+  color:#333;
 }
 
 /* Horizontal bar after each post */

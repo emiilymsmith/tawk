@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(http://fonts.googleapis.com/css?family=Ropa+Sans);
 @import url(http://fonts.googleapis.com/css?family=Karla);
+@import url(http://fonts.googleapis.com/css?family=News+Cycle);
 
 /* APPLIES TO EVERYTHING WITHIN THE BODY TAGS */
 body {
@@ -49,11 +50,10 @@ h2 {
 
 /* Post Content */
 h3 {
-  font-family: 'Karla', sans-serif;
-  font-size: 16px;
+  font-family: 'News Cycle', sans-serif;  font-size: 16px;
   margin-left: 35%;
   width:30%;
-  color:#888;
+  color:#333;
 }
 
 /* Changes properties of the <strong> tag*/

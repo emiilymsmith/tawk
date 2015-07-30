@@ -1,4 +1,5 @@
   @import url(http://fonts.googleapis.com/css?family=Fjalla+One);
+  @import url(http://fonts.googleapis.com/css?family=News+Cycle);
 
 body {
   font-family: "Fjalla One", sans-serif;
@@ -365,3 +366,9 @@ input[type=radio].css-checkbox {
 				-ms-user-select: none;
 				user-select: none;
 			}
+
+/* CSS for post content*/
+
+#post {
+  font-family: 'News Cycle', sans-serif;
+}
