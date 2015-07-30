@@ -1,5 +1,6 @@
 import webapp2
 import jinja2
+import time
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import urlfetch
@@ -56,11 +57,11 @@ class UserHandler(webapp2.RequestHandler):
         # query all posts, for the logged in user by matching the user
         #id we saved when they created a post
         users_advice = GiveAdvicePost.query(GiveAdvicePost.userID==current_user.user_id()).fetch()
-        users_fawks = GiveAdvicePost.query(FawkPost.userID==current_user.user_id()).fetch()
+        users_fawks = FawkPost.query(FawkPost.userID==current_user.user_id()).fetch()
 
         logout_url = users.create_logout_url('/')
         template = env.get_template('user.html')
-        variables = {'short_user':short_user,'users_advice':users_advice,'logout_url':logout_url}
+        variables = {'short_user':short_user,'users_advice':users_advice,'logout_url':logout_url,'users_fawks':users_fawks}
         self.response.write(template.render(variables))
 
 #handler for "giving advice"
@@ -136,28 +137,46 @@ class CategoryHandler(webapp2.RequestHandler):
 #for posts on fawk
 class FawkPost(ndb.Model):
     content = ndb.StringProperty(required=True)
-    username = ndb.StringProperty(required=True)
     user = ndb.UserProperty(required=True)
     userID = ndb.StringProperty(required=True)
 
-# '/fawk'
+# this lists all of the fawks '/fawk'
 class FawkHandler(webapp2.RequestHandler):
     def get(self):
+        current_user = users.get_current_user()
+        short_user = current_user.email().partition('@')[0].capitalize()
+
         posts = FawkPost.query().fetch() #list of post objects from ndb model
-        posts.sort()#by what though
+
         template = env.get_template('fawk.html')
-        variables = {'posts': posts}
+        variables = {'posts': posts,'short_user':short_user}
         self.response.write(template.render(variables))
 
     def post(self):
-        content = self.request.get('content')
         user = users.get_current_user()
         userID = user.user_id()
+        content = self.request.get('content')
 
         fawk_post = FawkPost(content=content,user=user,userID=userID)
         fawk_post.put()
-        return self.redirect("/fawk")
+        time.sleep(.5)
+        self.redirect('/fawk')
 
+
+#this is so you can post a fawk
+class PostAFawk(webapp2.RequestHandler):
+    def get(self):
+
+        # fawk_post_key_urlsafe = self.request.get('key')
+        # fawk_post_key = ndb.Key(urlsafe=fawk_post_key_urlsafe)
+        # post = fawk_post_key.get()
+        pass
+    def post(self):
+        content = self.request.get('content')
+
+        fawk_post = FawkPost(content=content,user=user,userID=userID)
+        fawk_post.put()
+        self.redirect('/fawk?key=' + post.key.urlsafe())
 #class FawkOTDHandler(webapp2.RequestHandler):
 #    def get(self):
 
