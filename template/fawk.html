@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href = "../static/style.css" rel = "stylesheet">
+    <link href = "../static/fawk.css" rel = "stylesheet">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
     <body>
-      <nav class="menu"> <!--the class is menu -->
-      <ul class="active"> <!--the menu is currently active, or visible -->
-        <li><a href="/">Home</a></li>
-        <li><a href="/">My Profile</a></li>
-        <li><a href="/">Go Tawk</a></li>
-        <li class="current-item"><a href="/">FAWK</a></li>
-        <li><a href="/">About Us</a></li>
-        <li><a href="/login">Login</a></li>
-      </ul>
+      <div class="container">
+        <div class="header">
+          <h1>TAWK<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="90px" width="90px" class="mouth"></h1>
+        </div>
+      </div>
+      <nav class="menu">
+        <ul class="active">
+            <li><a href="/" id=nav-tawk>TAWK<img src="http://getthemove.com/wp-content/uploads/2013/11/man282.png" height="23px" width="23px" class="mouth"></a></li>
+            <li><a href="/fawk">FAWK</a>
+            </li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/user"><img src="http://png.findicons.com/files/icons/2166/oxygen/48/user_female.png" height="32px" width="32px" class="profile"></a>
+              <ul class="sub-menu" id=profile>
+                <li><a href="/user">Profile</a>
+                <li><a href ="logout_url">Logout</a>
+              </ul>
+            </li>
+        </ul>
 
-      <a class="toggle-nav" href="#">&#9776;</a>
-      </form>
+        <a class="toggle-nav" href="#">&#9776;</a>
       </nav>
       <h1> FAWK</h1>
 
