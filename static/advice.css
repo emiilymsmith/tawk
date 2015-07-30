@@ -266,6 +266,7 @@ h2 {
   margin-right:auto;
   text-align: center;
   transition:background-color linear 0.25s, color linear 0.25s;
+  margin-bottom: 20px;
 }
 
 .categories a:hover {
