@@ -66,12 +66,10 @@ class UserHandler(webapp2.RequestHandler):
         # query all posts, for the logged in user by matching the user
         #id we saved when they created a post
         users_advice = GiveAdvicePost.query(GiveAdvicePost.userID==current_user.user_id()).fetch()
-
-        template = env.get_template('user.html')
-        variables = {'short_user':short_user,'users_advice':users_advice}
-        self.response.write(template.render(variables))
         logout_url = users.create_logout_url('/')
-        self.response.write('<a href ="%s" >Log Out</a>' % logout_url)
+        template = env.get_template('user.html')
+        variables = {'short_user':short_user,'users_advice':users_advice,'logout_url':logout_url}
+        self.response.write(template.render(variables))
 
 #handler for "giving advice"
 class GiveAdviceHandler(webapp2.RequestHandler):
