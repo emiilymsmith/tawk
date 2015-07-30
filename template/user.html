@@ -30,14 +30,23 @@
     <!-- the user's tawks - posts, comments, and upvotes -->
     <h4>My Advice:</h4>
     <hr>
-    <div class=posts>
-    <!-- honestly I don't know how to do this for loop lol -Jerica -->
-    {% for user_post in users_advice %}
-    <p class=title>{{user_post.title}}</p>
-    <p class=content>{{user_post.content}}</p>
-    <hr>
-    {% endfor %}
-    </div>
+      <div class=posts>
+      <!-- honestly I don't know how to do this for loop lol -Jerica -->
+      {% for user_post in users_advice %}
+      <p class=title1>{{user_post.title}}</p>
+      <p class=content1>{{user_post.content}}</p>
+      <hr>
+      {% endfor %}
+      </div>
+
+      <div class=fawks>
+
+      {% for fawk in user_fawk %}
+      <p class=title2>{{fawk.title}}</p>
+      <p class=content2>{{fawk.content}}</p>
+      <hr>
+      {% endfor %}
+      </div>
     <!--
     <h4> Comments </h4>
     <h4> My Upvotes </h4>
