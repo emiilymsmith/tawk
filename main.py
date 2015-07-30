@@ -63,10 +63,6 @@ class AboutHandler(webapp2.RequestHandler):
         variables = {}
         self.response.write(template.render(variables))
 
-#users database with username and passwords
-# class User(ndb.Model):
-#     username = ndb.StringProperty(required=True)
-#     password = ndb.StringProperty(required=True)
 
 #new database for a "give advice" post
 class GiveAdvicePost(ndb.Model):
@@ -78,10 +74,13 @@ class GiveAdvicePost(ndb.Model):
 #connects to /user
 class UserHandler(webapp2.RequestHandler):
     def get(self):
-        # user_key_urlsafe = self.request.get('key')
-        # user_key = ndb.Key(urlsafe=user_key_urlsafe)
         user = users.get_current_user()
         short_user = user.email().partition('@')[0].capitalize()
+
+        all_posts = GiveAdvicePost.query().fetch()
+        url_category = self.request.get('tag')
+        all_advice = GiveAdvicePost.query(GiveAdvicePost.category==url_category).fetch()
+
         template = env.get_template('user.html')
         variables = {'short_user':short_user}
         self.response.write(template.render(variables))
@@ -116,7 +115,7 @@ class PostOutlineHandler(webapp2.RequestHandler):
         post = post_key.get()
 
         user = users.get_current_user()
-        short_user = user.email().partition('@')[0]
+        short_user = user.email().partition('@')[0].capitalize()
         #separated the email by @ and prints index 0 or everything before the @
 
         template = env.get_template('post_outline.html')
