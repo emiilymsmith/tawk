@@ -67,8 +67,9 @@ class UserHandler(webapp2.RequestHandler):
         #id we saved when they created a post
         users_advice = GiveAdvicePost.query(GiveAdvicePost.userID==current_user.user_id()).fetch()
         logout_url = users.create_logout_url('/')
+        logout = self.response.write('<a href ="%s" >Log Out</a>' % logout_url)
         template = env.get_template('user.html')
-        variables = {'short_user':short_user,'users_advice':users_advice,'logout_url':logout_url}
+        variables = {'short_user':short_user,'users_advice':users_advice,'logout':logout}
         self.response.write(template.render(variables))
 
 #handler for "giving advice"
@@ -137,7 +138,8 @@ class CategoryHandler(webapp2.RequestHandler):
         variables = {'all_advice': all_advice,
                      'categories':sorted(categories),
                      'category_from_post':category_from_post,
-                     'url_category': url_category}
+                     'url_category': url_category
+                     'short_user':short_user}
         self.response.write(template.render(variables))
 
 #for posts on fawk
