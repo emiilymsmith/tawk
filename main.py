@@ -15,7 +15,8 @@ env.globals['shorter_name'] = shorter_name
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('main.html')
-        variables = {}
+        logout_url = users.create_logout_url('/')
+        variables = {'logout_url':logout_url}
         self.response.write(template.render(variables))
         #self.response.write('Hello world!')
 
@@ -33,14 +34,16 @@ class LoginHandler(webapp2.RequestHandler):
 
         self.response.out.write('<html><body>%s</body></html>' % greeting)
         template = env.get_template('login.html')
-        variables = {}
+        logout_url = users.create_logout_url('/')
+        variables = {'logout_url':logout_url}
         self.response.write(template.render(variables))
 
 #opens /about us
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('about.html')
-        variables = {}
+        logout_url = users.create_logout_url('/')
+        variables = {'logout_url':logout_url}
         self.response.write(template.render(variables))
 
 
@@ -71,7 +74,8 @@ class UserHandler(webapp2.RequestHandler):
 class GiveAdviceHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('give_advice.html')
-        variables = {}
+        logout_url = users.create_logout_url('/')
+        variables = {'logout_url':logout_url}
         self.response.write(template.render(variables))
 
     def post(self):
@@ -101,7 +105,8 @@ class PostOutlineHandler(webapp2.RequestHandler):
         #separated the email by @ and prints index 0 or everything before the @
 
         template = env.get_template('post_outline.html')
-        variables = {'post': post,'short_user': short_user}
+        logout_url = users.create_logout_url('/')
+        variables = {'post': post,'short_user': short_user,'logout_url':logout_url}
         self.response.write(template.render(variables))
 
 # for the home page of advice posts
@@ -114,7 +119,8 @@ class AdviceHandler(webapp2.RequestHandler):
             categories.add(category_from_post)
 
         template = env.get_template('advice.html')
-        variables = {'categories':sorted(categories)}
+        logout_url = users.create_logout_url('/')
+        variables = {'categories':sorted(categories),'logout_url':logout_url}
         self.response.write(template.render(variables))
 
 class CategoryHandler(webapp2.RequestHandler):
@@ -131,11 +137,13 @@ class CategoryHandler(webapp2.RequestHandler):
             categories.add(category_from_post)
 
         template = env.get_template('category.html')
+        logout_url = users.create_logout_url('/')
         variables = {'all_advice': all_advice,
                      'categories':sorted(categories),
                      'category_from_post':category_from_post,
                      'url_category': url_category,
-                     'short_user':short_user}
+                     'short_user':short_user,
+                     'logout_url':logout_url}
         self.response.write(template.render(variables))
 
 #for posts on fawk
@@ -153,7 +161,8 @@ class FawkHandler(webapp2.RequestHandler):
         posts = FawkPost.query().fetch() #list of post objects from ndb model
 
         template = env.get_template('fawk.html')
-        variables = {'posts': posts,'short_user':short_user}
+        logout_url = users.create_logout_url('/')
+        variables = {'posts': posts,'short_user':short_user,'logout_url':logout_url}
         self.response.write(template.render(variables))
 
     def post(self):

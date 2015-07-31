@@ -37,7 +37,7 @@
           <li><a href="/user"><img src="http://png.findicons.com/files/icons/2166/oxygen/48/user_female.png" height="32px" width="32px" class="profile"></a>
             <ul class="sub-menu" id=profile>
               <li><a href="/user">Profile</a>
-              <li><a href ="logout_url">Logout</a>
+              <li><a href ="{{logout_url}}">Logout</a>
             </ul>
           </li>
       </ul>
@@ -48,7 +48,7 @@
       <!-- Here we have a page for each post and its content -->
       <h2>{{post.title}}<h2>
       <h3><p class=content>"{{post.content}}"</p>
-        <p>#<a href="/{{post.category}}" class=category><strong>{{post.category}}</strong></p></h3>
+        <p>#<a href="/category?tag={{post.category}}" class=category><strong>{{post.category}}</strong></p></h3>
         <hr>
       <h4><a href="/postoutline?key={{post.key.urlsafe()}}"> {{user}}</a></h4>
     </div>
