@@ -318,3 +318,12 @@ body {
    height:60px;   /* Height of the footer */
    background:#ddd;
 }
+
+.fawk {
+  width: 70%;
+}
+
+.new_fawk {
+  margin-top:15px;
+  margin-left: 30px;
+}
