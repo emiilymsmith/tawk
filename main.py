@@ -5,8 +5,11 @@ from google.appengine.ext import ndb
 from google.appengine.api import users
 from google.appengine.api import urlfetch
 
+def shorter_name(user):
+    return user.email().partition('@')[0].capitalize()
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('template'))
+env.globals['shorter_name'] = shorter_name
 
 # '/' goes to main.html in template
 class MainHandler(webapp2.RequestHandler):
@@ -126,6 +129,7 @@ class CategoryHandler(webapp2.RequestHandler):
         category_from_post = url_category
         for post in all_advice:
             categories.add(category_from_post)
+
         template = env.get_template('category.html')
         variables = {'all_advice': all_advice,
                      'categories':sorted(categories),
@@ -161,24 +165,6 @@ class FawkHandler(webapp2.RequestHandler):
         fawk_post.put()
         time.sleep(.5)
         self.redirect('/fawk')
-
-
-#this is so you can post a fawk
-class PostAFawk(webapp2.RequestHandler):
-    def get(self):
-
-        # fawk_post_key_urlsafe = self.request.get('key')
-        # fawk_post_key = ndb.Key(urlsafe=fawk_post_key_urlsafe)
-        # post = fawk_post_key.get()
-        pass
-    def post(self):
-        content = self.request.get('content')
-
-        fawk_post = FawkPost(content=content,user=user,userID=userID)
-        fawk_post.put()
-        self.redirect('/fawk?key=' + post.key.urlsafe())
-#class FawkOTDHandler(webapp2.RequestHandler):
-#    def get(self):
 
 
 app = webapp2.WSGIApplication([
