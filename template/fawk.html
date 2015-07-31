@@ -42,7 +42,9 @@
 
       <section class="fawk_posts">
         {% for post in posts %}
-          <p> "{{post.content}} FAWK." <em>-{{shorter_name(post.user)}}</em> </p>
+          <p>"{{post.content}} FAWK."</p>
+          <hr>
+          <h6><em>-{{shorter_name(post.user)}}</em></h6>
         {% endfor %}
 
       </section>
